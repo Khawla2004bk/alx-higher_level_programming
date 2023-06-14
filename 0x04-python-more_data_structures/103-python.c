@@ -3,13 +3,14 @@
 
 /**
  * print_python_bytes - Prints bytes information
+ *
  * @p: Python Object
  * Return: no return
  */
 void print_python_bytes(PyObject *p)
 {
-	char *str;
-	long int s, i, lim;
+	char *string;
+	long int size, i, limit;
 
 	printf("[.] bytes object info\n");
 	if (!PyBytes_Check(p))
@@ -17,44 +18,51 @@ void print_python_bytes(PyObject *p)
 		printf("  [ERROR] Invalid Bytes Object\n");
 		return;
 	}
-	s = ((PyVarObject *)(p))->ob_size;
-	str = ((PyBytesObject *)p)->ob_sval;
 
-	printf("  size: %ld\n", s);
-	printf("  trying string: %s\n", str);
-	if (s >= 10)
-		lim = 10;
+	size = ((PyVarObject *)(p))->ob_size;
+	string = ((PyBytesObject *)p)->ob_sval;
+
+	printf("  size: %ld\n", size);
+	printf("  trying string: %s\n", string);
+
+	if (size >= 10)
+		limit = 10;
 	else
-		lim = s + 1;
-	printf("  first %ld bytes:", lim);
-	for (i = 0; i < lim; i++)
-		if (str[i] >= 0)
-			printf(" %02x", str[i]);
+		limit = size + 1;
+
+	printf("  first %ld bytes:", limit);
+
+	for (i = 0; i < limit; i++)
+		if (string[i] >= 0)
+			printf(" %02x", string[i]);
 		else
-			printf(" %02x", 256 + str[i]);
+			printf(" %02x", 256 + string[i]);
+
 	printf("\n");
 }
 
 /**
  * print_python_list - Prints list information
+ *
  * @p: Python Object
  * Return: no return
  */
 void print_python_list(PyObject *p)
 {
-	long int s, i;
-	PyListObject *l;
-	PyObject *objt;
+	long int size, i;
+	PyListObject *list;
+	PyObject *obj;
 
-	s = ((PyVarObject *)(p))->ob_size;
-	l = (PyListObject *)p;
+	size = ((PyVarObject *)(p))->ob_size;
+	list = (PyListObject *)p;
 
 	printf("[*] Python list info\n");
-	printf("[*] Size of the Python List = %ld\n", s);
-	printf("[*] Allocated = %ld\n", l->allocated);
-	for (i = 0; i < s; i++)
+	printf("[*] Size of the Python List = %ld\n", size);
+	printf("[*] Allocated = %ld\n", list->allocated);
+
+	for (i = 0; i < size; i++)
 	{
-		objt = ((PyListObject *)p)->ob_item[i];
+		obj = ((PyListObject *)p)->ob_item[i];
 		printf("Element %ld: %s\n", i, ((obj)->ob_type)->tp_name);
 		if (PyBytes_Check(obj))
 			print_python_bytes(obj);
