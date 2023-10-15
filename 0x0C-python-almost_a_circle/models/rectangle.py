@@ -196,16 +196,16 @@ class Rectangle(Base):
         elif kwargs:
             for key, value in kwargs.items():
                 setattr(self, key, value)
+
     def to_dictionary(self):
-        """ 
+        """
         Method that returns the dictionary representation of a Rectangle
         """
         rect = {
-            "x" : self.x,
-            "y" : self.y,
-            "id" : self.id,
-            "height" : self.height,
-            "width" : self.width,
+            "x": self.x,
+            "y": self.y,
+            "id": self.id,
+            "height": self.height,
+            "width": self.width,
         }
         return rect
-        
