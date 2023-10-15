@@ -1,5 +1,4 @@
-""" import Rectangle class """
-
+#!/usr/bin/python3
 from models.rectangle import Rectangle
 """ Class Square """
 
