@@ -1,3 +1,4 @@
+""" import Rectangle class """
 from models.rectangle import Rectangle
 """ Class Square """
 
