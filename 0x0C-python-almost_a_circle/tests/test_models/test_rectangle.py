@@ -210,13 +210,13 @@ class TestClassRectangle(unittest.TestCase):
     def test_Rectangle_To_dict_1(self):
         Base._Base__nb_objects = 0
         """ test_Rectangle_To_dict_1 """
-        r4 =  Rectangle(10, 2, 1, 9)
+        r4 = Rectangle(10, 2, 1, 9)
         excepted = {'x': 1, 'y': 9, 'id': 1, 'height': 2, 'width': 10}
         self.assertEqual(r4.to_dictionary(), excepted)
 
     def test_Rectangle_To_dict_2(self):
         Base._Base__nb_objects = 0
         """ test_Rectangle_To_dict_1 """
-        r5 =  Rectangle(10, 5)
+        r5 = Rectangle(10, 5)
         excepted = {'x': 0, 'y': 0, 'id': 1, 'height': 5, 'width': 10}
         self.assertEqual(r5.to_dictionary(), excepted)
