@@ -17,7 +17,6 @@ class Square(Rectangle):
         """
         super().__init__(size, size, x, y, id)
 
-
     @property
     def size(self):
         """
@@ -69,14 +68,13 @@ class Square(Rectangle):
                 setattr(self, key, value)
 
     def to_dictionary(self):
-        """ 
+        """
         Method that returns the dictionary representation of a Rectangle
         """
         square = {
-            "id" : self.id,
-            "x" : self.x,
-            "size" : self.size,
-            "y" : self.y
+            "id": self.id,
+            "x": self.x,
+            "size": self.size,
+            "y": self.y
         }
         return square
-        
