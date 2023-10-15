@@ -49,3 +49,11 @@ class Base:
         if json_string is not None and len(json_string) > 0:
             str_list = json.loads(json_string)
         return (str_list)
+
+    @classmethod
+    def create(cls, **dictionary):
+        """
+        class method that returns an instance with all attributes already set
+        """
+        dummy = cls(**dictionary)
+        return dummy
