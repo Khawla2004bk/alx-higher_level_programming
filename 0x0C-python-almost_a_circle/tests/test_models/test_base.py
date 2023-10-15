@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+""" import modules """
 import unittest
 from models.base import Base
 from models.rectangle import Rectangle
@@ -10,7 +11,7 @@ from unittest.mock import patch
 
 class TestClassBase(unittest.TestCase):
     """ TestClassBase """
-    
+
     def test_id_10(self):
         """ test_id_10 """
         self.assertEqual(Base(10).id, 10)
@@ -26,7 +27,7 @@ class TestClassBase(unittest.TestCase):
     def test_id_neg(self):
         """ test_id_neg """
         self.assertEqual(Base(-2).id, -2)
-        
+
     def test_id_None(self):
         """ test_id_None """
         self.assertEqual(Base(None).id, 3)
@@ -41,7 +42,7 @@ class TestClassBase(unittest.TestCase):
         """ test_Raise_Failure """
         id = "100"
         with self.assertRaises(TypeError):
-          Base(id)
+            Base(id)
 
     @unittest.expectedFailure
     def test_id_Failure(self):
@@ -78,8 +79,8 @@ class TestClassBase(unittest.TestCase):
         r1 = Rectangle(10, 7, 2, 8)
         r2 = Rectangle(2, 4)
         Rectangle.save_to_file([r1, r2])
-        with open ("Rectangle.json", "r") as file:
+        with open("Rectangle.json", "r") as file:
             file_content = file.read()
-        self.assertEqual(file_content, '[{"y": 8, "x": 2, "id": 1, "width": 10, "height": 7}, {"y": 0, "x": 0, "id": 2, "width": 2, "height": 4}]')
-
-
+        excepted = "[{"y": 8, "x": 2, "id": 1, "width": 10, "height": 7}, "
+        excepted += "{"y": 0, "x": 0, "id": 2, "width": 2, "height": 4}]"
+        self.assertEqual(file_content, excepted)

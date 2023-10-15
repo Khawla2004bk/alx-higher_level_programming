@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+""" import modules """
 import unittest
 from models.base import Base
 from models.rectangle import Rectangle
@@ -200,13 +201,13 @@ class TestClassSquare(unittest.TestCase):
     def test_Square_To_dict_1(self):
         Base._Base__nb_objects = 0
         """ test_Square_To_dict_1 """
-        r4 =  Square(10, 2, 1, 9)
+        r4 = Square(10, 2, 1, 9)
         excepted = {'id': 9, 'x': 2, 'size': 10, 'y': 1}
         self.assertEqual(r4.to_dictionary(), excepted)
 
     def test_Square_To_dict_2(self):
         Base._Base__nb_objects = 0
         """ test_Square_To_dict_1 """
-        r5 =  Square(10, 5)
+        r5 = Square(10, 5)
         excepted = {'id': 1, 'x': 5, 'size': 10, 'y': 0}
         self.assertEqual(r5.to_dictionary(), excepted)
