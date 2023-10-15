@@ -1,5 +1,4 @@
 #!/usr/bin/python3
-""" import modules """
 import unittest
 from models.base import Base
 from models.rectangle import Rectangle
@@ -20,10 +19,10 @@ class TestClassSquare(unittest.TestCase):
         self.assertEqual(s1.size, 10)
 
     def test_width_height(self):
-        """ test_id_10 """
+        """ test_width_height """
         self.assertEqual(Square(10).id, 1)
-        self.assertEqual(Square(0).width, 0)
-        self.assertEqual(Square(0).size, 0)
+        self.assertEqual(Square(2).width, 2)
+        self.assertEqual(Square(3).size, 3)
         self.assertEqual(Square(10).height, 10)
         self.assertEqual(Square(8).width + Square(5).height, 13)
 
@@ -42,7 +41,7 @@ class TestClassSquare(unittest.TestCase):
         """ test_Raise_ValueError """
         with self.assertRaises(ValueError) as e:
             Square(-3, 2, 0, 12)
-        self.assertEqual(str(e.exception), "width must be >= 0")
+        self.assertEqual(str(e.exception), "width must be > 0")
 
     def test_Raise_ValueError_x(self):
         """ test_Raise_ValueError """
@@ -79,10 +78,10 @@ class TestClassSquare(unittest.TestCase):
         s = Square(10, 2, 5, 12)
         self.assertEqual(s.area(), 100)
 
-    def test_Area_Zero(self):
-        """ test_Area_Zero """
-        s = Square(0)
-        self.assertEqual(s.area(), 0)
+    def test_Area_One(self):
+        """ test_Area_One """
+        s = Square(1)
+        self.assertEqual(s.area(), 1)
 
     def test_Dispaly_2x2(self):
         """ test_Dispaly_2x2 """
@@ -102,12 +101,13 @@ class TestClassSquare(unittest.TestCase):
         """ test_Dispaly_0x0 """
         r = Square(1, 1, 1, 15)
         r1 = Square(2, 2, 2, 12)
-        r2 = Square(0, 3, 3, 12)
+        r2 = Square(1, 3, 3, 12)
         with patch('sys.stdout', new_callable=StringIO) as printed:
             r.display()
             r1.display()
             r2.display()
-        self.assertEqual(printed.getvalue(), "\n #\n\n\n  ##\n  ##\n\n\n\n")
+        excepted = "\n #\n\n\n  ##\n  ##\n\n\n\n   #\n"
+        self.assertEqual(printed.getvalue(), excepted)
 
     def test_Dispaly_4x0(self):
         """ test_Dispaly_4x0 """
@@ -147,14 +147,14 @@ class TestClassSquare(unittest.TestCase):
 
     def test_Dispaly_1_0x0(self):
         """ test_Dispaly_1_0x0 """
-        r = Square(0, 0, 0, 15)
-        r1 = Square(2, 0, 2, 12)
-        r2 = Square(0, 6, 2, 12)
+        r = Square(1, 1, 0, 15)
+        r1 = Square(2, 2, 2, 12)
+        r2 = Square(2, 6, 2, 12)
         with patch('sys.stdout', new_callable=StringIO) as printed:
             r.display()
             r1.display()
             r2.display()
-        excepted_output = "\n\n##\n##\n\n\n"
+        excepted_output = " #\n\n\n  ##\n  ##\n\n\n      ##\n      ##\n"
         self.assertEqual(printed.getvalue(), excepted_output)
 
     def test_Dispaly_1_4x0(self):
@@ -165,18 +165,18 @@ class TestClassSquare(unittest.TestCase):
         self.assertEqual(printed.getvalue(), " ####\n ####\n ####\n ####\n")
 
     def test_str_1(self):
-        """ test_str """
+        """ test_str_1 """
         r = Square(4, 15, 5, 20)
         self.assertEqual(r.__str__(), "[Square] (20) 15/5 - 4")
 
     def test_str_2(self):
-        """ test_str """
+        """ test_str_2 """
         Base._Base__nb_objects = 0
         r1 = Square(4, 1)
         self.assertEqual(r1.__str__(), "[Square] (1) 1/0 - 4")
 
     def test_str_3(self):
-        """ test_str """
+        """ test_str_3 """
         r1 = Square(12, 1, 30, 2)
         self.assertEqual(r1.__str__(), "[Square] (2) 1/30 - 12")
 

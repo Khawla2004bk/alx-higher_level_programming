@@ -12,17 +12,17 @@ from unittest.mock import patch
 class TestClassBase(unittest.TestCase):
     """ TestClassBase """
 
-    def test_id_10(self):
-        """ test_id_10 """
-        self.assertEqual(Base(10).id, 10)
-
-    def test_id(self):
-        """ test_id """
+    def test_id_1(self):
+        """ test_id_1 """
         self.assertEqual(Base().id, 1)
 
     def test_id_2(self):
         """ test_id_2 """
         self.assertEqual(Base().id, 2)
+
+    def test_id_3(self):
+        """ test_id_2 """
+        self.assertEqual(Base().id, 3)
 
     def test_id_neg(self):
         """ test_id_neg """
@@ -30,7 +30,7 @@ class TestClassBase(unittest.TestCase):
 
     def test_id_None(self):
         """ test_id_None """
-        self.assertEqual(Base(None).id, 3)
+        self.assertEqual(Base(None).id, 4)
 
     def test_id_Var(self):
         """ test_id_Var """
@@ -73,14 +73,3 @@ class TestClassBase(unittest.TestCase):
         excepted = '[{"x": 2, "y": 8, "id": 1, "height": 7, "width": 10}, '
         excepted += '{"x": 15, "y": 9, "id": 2, "height": 5, "width": 3}]'
         self.assertEqual(Base.to_json_string(list_dict), excepted)
-
-    def test_save_to_file_1(self):
-        """ test_save_to_file_1 """
-        r1 = Rectangle(10, 7, 2, 8)
-        r2 = Rectangle(2, 4)
-        Rectangle.save_to_file([r1, r2])
-        with open("Rectangle.json", "r") as file:
-            file_content = file.read()
-        excepted = "[{"y": 8, "x": 2, "id": 1, "width": 10, "height": 7}, "
-        excepted += "{"y": 0, "x": 0, "id": 2, "width": 2, "height": 4}]"
-        self.assertEqual(file_content, excepted)

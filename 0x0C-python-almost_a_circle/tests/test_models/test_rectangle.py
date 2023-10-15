@@ -1,5 +1,4 @@
 #!/usr/bin/python3
-""" import modules """
 import unittest
 from models.base import Base
 from models.rectangle import Rectangle
@@ -19,9 +18,9 @@ class TestClassRectangle(unittest.TestCase):
         self.assertEqual(r1.width, 10)
 
     def test_width_height(self):
-        """ test_id_10 """
+        """ test_width_height """
         self.assertEqual(Rectangle(10, 12).id, 2)
-        self.assertEqual(Rectangle(0, 12).width, 0)
+        self.assertEqual(Rectangle(1, 12).width, 1)
         self.assertEqual(Rectangle(10, 12).height, 12)
         self.assertEqual(Rectangle(8, 6).width + Rectangle(5, 1).height, 9)
 
@@ -40,13 +39,13 @@ class TestClassRectangle(unittest.TestCase):
         """ test_Raise_ValueError """
         with self.assertRaises(ValueError) as e:
             Rectangle(-3, 2, 0, 0, 12)
-        self.assertEqual(str(e.exception), "width must be >= 0")
+        self.assertEqual(str(e.exception), "width must be > 0")
 
     def test_Raise_ValueError_height(self):
         """ test_Raise_ValueError """
         with self.assertRaises(ValueError) as e:
             Rectangle(10, -2, 0, 0, 12)
-        self.assertEqual(str(e.exception), "height must be >= 0")
+        self.assertEqual(str(e.exception), "height must be > 0")
 
     def test_Raise_ValueError_x(self):
         """ test_Raise_ValueError """
@@ -91,8 +90,8 @@ class TestClassRectangle(unittest.TestCase):
 
     def test_Area_Zero(self):
         """ test_Area_Zero """
-        r = Rectangle(10, 0)
-        self.assertEqual(r.area(), 0)
+        r = Rectangle(10, 1)
+        self.assertEqual(r.area(), 10)
 
     def test_Dispaly_2x2(self):
         """ test_Dispaly_2x2 """
@@ -110,14 +109,12 @@ class TestClassRectangle(unittest.TestCase):
 
     def test_Dispaly_0x0(self):
         """ test_Dispaly_0x0 """
-        r = Rectangle(0, 0, 0, 0, 15)
-        r1 = Rectangle(10, 0, 0, 0, 12)
-        r2 = Rectangle(0, 6, 0, 0, 12)
+        r = Rectangle(1, 1, 0, 0, 15)
+        r2 = Rectangle(1, 6, 0, 0, 12)
         with patch('sys.stdout', new_callable=StringIO) as printed:
             r.display()
-            r1.display()
             r2.display()
-        self.assertEqual(printed.getvalue(), "\n\n\n\n\n\n")
+        self.assertEqual(printed.getvalue(), "#\n#\n#\n#\n#\n#\n#\n")
 
     def test_Dispaly_4x0(self):
         """ test_Dispaly_4x0 """
@@ -138,8 +135,8 @@ class TestClassRectangle(unittest.TestCase):
 
     def test_str_3(self):
         """ test_str_3 """
-        r1 = Rectangle(0, 0, 0, 0, 0)
-        self.assertEqual(r1.__str__(), '[Rectangle] (0) 0/0 - 0/0')
+        r1 = Rectangle(1, 1, 0, 0, 0)
+        self.assertEqual(r1.__str__(), '[Rectangle] (0) 0/0 - 1/1')
 
     def test_Dispaly_1_2x3_2_2(self):
         """ test_Dispaly_1_2x2 """
@@ -157,14 +154,14 @@ class TestClassRectangle(unittest.TestCase):
 
     def test_Dispaly_1_0x0(self):
         """ test_Dispaly_1_0x0 """
-        r = Rectangle(0, 0, 1, 0, 15)
-        r1 = Rectangle(10, 0, 0, 2, 12)
-        r2 = Rectangle(0, 6, 3, 2, 12)
+        r = Rectangle(1, 2, 1, 0, 15)
+        r1 = Rectangle(1, 1, 0, 2, 12)
+        r2 = Rectangle(1, 3, 3, 2, 12)
         with patch('sys.stdout', new_callable=StringIO) as printed:
             r.display()
             r1.display()
             r2.display()
-        excepted_output = "\n\n\n\n   \n   \n   \n   \n   \n   \n"
+        excepted_output = " #\n #\n\n\n#\n\n\n   #\n   #\n   #\n"
         self.assertEqual(printed.getvalue(), excepted_output)
 
     def test_Dispaly_1_4x0(self):
