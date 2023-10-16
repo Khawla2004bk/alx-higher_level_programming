@@ -242,4 +242,17 @@ class TestClassRectangle(unittest.TestCase):
         self.assertFalse(r1 is r2)
         self.assertFalse(r1 == r2)
 
-
+    def test_json_to_string_1(self):
+        Base._Base__nb_objects = 0
+        """ test_json_to_string_1 """
+        list_input = [
+        {'id': 89, 'width': 10, 'height': 4}, 
+        {'id': 7, 'width': 1, 'height': 7}
+    ]
+        json_list_input = Rectangle.to_json_string(list_input)
+        list_output = Rectangle.from_json_string(json_list_input)
+        self.assertTrue(isinstance(list_input, list))
+        self.assertTrue(isinstance(json_list_input, str))
+        self.assertTrue(isinstance(list_output, list))
+        self.assertEqual(json_list_input,'[{"id": 89, "width": 10, "height": 4}, {"id": 7, "width": 1, "height": 7}]')
+        self.assertEqual(list_output,[{'id': 89, 'width': 10, 'height': 4}, {'id': 7, 'width': 1, 'height': 7}])
