@@ -32,6 +32,12 @@ class TestClassSquare(unittest.TestCase):
         s1 = Square(2, 15, 0, 12)
         self.assertEqual(s1.x, 15)
 
+    def test_Raise_ValueError_Zero(self):
+        """ test_Raise_ValueError """
+        with self.assertRaises(ValueError) as e:
+            Square(0, 2, 0, 12)
+        self.assertEqual(str(e.exception), "width must be > 0")
+
     def test_y(self):
         """ test_y """
         s1 = Square(3, 15, 2, 12)
@@ -247,3 +253,17 @@ class TestClassSquare(unittest.TestCase):
             self.assertEqual(rect_input.y, rect_output.y)
             self.assertEqual(rect_input.width, rect_output.width)
             self.assertEqual(rect_input.height, rect_output.height)
+
+    def test_save_to_file_1(self):
+        Base._Base__nb_objects = 0
+        """ test_save_to_file1 """
+        Square.save_to_file([])
+        with open("Square.json", "r") as file1:
+            self.assertEqual(file1.read(),'[]')
+
+
+    def test_save_to_file_2(self):
+        """ test_save_to_file_2 """
+        Square.save_to_file(None)
+        with open("Square.json", "r") as file2:
+            self.assertEqual(file2.read(),'[]')
