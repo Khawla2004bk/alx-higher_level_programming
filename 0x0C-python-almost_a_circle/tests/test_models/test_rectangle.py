@@ -280,3 +280,17 @@ class TestClassRectangle(unittest.TestCase):
             self.assertEqual(rect_input.y, rect_output.y)
             self.assertEqual(rect_input.width, rect_output.width)
             self.assertEqual(rect_input.height, rect_output.height)
+
+    def test_save_to_file_1(self):
+        Base._Base__nb_objects = 0
+        """ test_save_to_file1 """
+        Rectangle.save_to_file([])
+        with open("Rectangle.json", "r") as file1:
+            self.assertEqual(file1.read(),'[]')
+
+
+    def test_save_to_file_2(self):
+        """ test_save_to_file_2 """
+        Rectangle.save_to_file(None)
+        with open("Rectangle.json", "r") as file2:
+            self.assertEqual(file2.read(),'[]')
