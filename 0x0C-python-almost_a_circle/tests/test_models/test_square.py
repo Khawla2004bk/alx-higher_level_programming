@@ -211,3 +211,25 @@ class TestClassSquare(unittest.TestCase):
         r5 = Square(10, 5)
         excepted = {'id': 1, 'x': 5, 'size': 10, 'y': 0}
         self.assertEqual(r5.to_dictionary(), excepted)
+
+    def test_create_1(self):
+        Base._Base__nb_objects = 0
+        """ test_create_1 """
+        s1 = Square(3, 5, 1)
+        s1_dictionary = s1.to_dictionary()
+        s2 = Square.create(**s1_dictionary)
+        self.assertEqual(s1.__str__(), "[Square] (1) 5/1 - 3")
+        self.assertEqual(s2.__str__(), "[Square] (1) 5/1 - 3")
+        self.assertFalse(s1 is s2)
+        self.assertFalse(s1 == s2)
+
+    def test_save_to_file(self):
+        Base._Base__nb_objects = 0
+        """ test_save_to_file """
+        r1 = Square(10, 7, 2, 8)
+        r2 = Square(2, 4)
+        Square.save_to_file([r1, r2])
+        with open("Square.json", "r") as file:
+            self.assertEqual(file.read(),'[{"id": 8, "x": 7, "size": 10, "y": 2}, {"id": 1, "x": 4, "size": 2, "y": 0}]')
+            print(file.read())
+

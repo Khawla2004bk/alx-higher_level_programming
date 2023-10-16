@@ -256,3 +256,13 @@ class TestClassRectangle(unittest.TestCase):
         self.assertTrue(isinstance(list_output, list))
         self.assertEqual(json_list_input,'[{"id": 89, "width": 10, "height": 4}, {"id": 7, "width": 1, "height": 7}]')
         self.assertEqual(list_output,[{'id': 89, 'width': 10, 'height': 4}, {'id': 7, 'width': 1, 'height': 7}])
+
+    def test_save_to_file(self):
+        Base._Base__nb_objects = 0
+        """ test_save_to_file """
+        r1 = Rectangle(10, 7, 2, 8)
+        r2 = Rectangle(2, 4)
+        Rectangle.save_to_file([r1, r2])
+        with open("Rectangle.json", "r") as file:
+            self.assertEqual(file.read(),'[{"x": 2, "y": 8, "id": 1, "height": 7, "width": 10}, {"x": 0, "y": 0, "id": 2, "height": 4, "width": 2}]')
+            print(file.read())
