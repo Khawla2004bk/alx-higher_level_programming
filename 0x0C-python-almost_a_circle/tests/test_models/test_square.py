@@ -233,3 +233,17 @@ class TestClassSquare(unittest.TestCase):
             self.assertEqual(file.read(),'[{"id": 8, "x": 7, "size": 10, "y": 2}, {"id": 1, "x": 4, "size": 2, "y": 0}]')
             print(file.read())
 
+    def test_load_from_file(self):
+        Base._Base__nb_objects = 0
+        """ test_save_to_file """
+        r1 = Square(10, 7, 2, 8)
+        r2 = Square(2, 4)
+        list_rectangles_input = [r1, r2]
+        Square.save_to_file(list_rectangles_input)
+        Square.save_to_file([r1, r2])
+        list_rectangles_output = Square.load_from_file()
+        for rect_input, rect_output in zip(list_rectangles_input, list_rectangles_output):
+            self.assertEqual(rect_input.x, rect_output.x)
+            self.assertEqual(rect_input.y, rect_output.y)
+            self.assertEqual(rect_input.width, rect_output.width)
+            self.assertEqual(rect_input.height, rect_output.height)
