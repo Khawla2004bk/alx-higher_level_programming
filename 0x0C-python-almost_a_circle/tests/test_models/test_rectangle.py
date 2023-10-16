@@ -230,3 +230,16 @@ class TestClassRectangle(unittest.TestCase):
         r5 = Rectangle(10, 5)
         excepted = {'x': 0, 'y': 0, 'id': 1, 'height': 5, 'width': 10}
         self.assertEqual(r5.to_dictionary(), excepted)
+
+    def test_create_1(self):
+        Base._Base__nb_objects = 0
+        """ test_case : method def create(cls, **dictionary): that returns an instance with all attributes already set"""
+        r1 = Rectangle(3, 5, 1)
+        r1_dictionary = r1.to_dictionary()
+        r2 = Rectangle.create(**r1_dictionary)
+        self.assertEqual(r1.__str__(), "[Rectangle] (1) 1/0 - 3/5")
+        self.assertEqual(r2.__str__(), "[Rectangle] (1) 1/0 - 3/5")
+        self.assertFalse(r1 is r2)
+        self.assertFalse(r1 == r2)
+
+
